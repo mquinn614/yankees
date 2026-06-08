@@ -9,7 +9,12 @@
     "total_titles": 27,
     "al_pennants": 40,
     "chasing_number": 28,
-    "current_season": null,
+    "current_season": {
+      "year": 2026,
+      "wins": 38,
+      "losses": 26,
+      "as_of": "2026-06-08"
+    },
     "source_note": "Records and postseason results from Baseball-Reference / MLB.com; payroll context from public luxury-tax reporting. Current-season record is pulled live from the MLB Stats API. Regenerate via scripts/update_data.py."
   },
   "titles": [
