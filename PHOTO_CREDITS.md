@@ -5,7 +5,7 @@ The photos used on the page are **public domain**.
 | Slot | File (`assets/…`) | Author | License |
 |---|---|---|---|
 | Hero            | `yanks.webp` | — | Public Domain |
-| The 2009 Cliff  | `jeter.jpg`  | — | Public Domain |
+| The 2009 Cliff  | `jeter2.jpg` | — | Public Domain |
 | Why Now (Judge) | `judge.webp` | — | Public Domain |
 | Closer          | `stadium.jpg` | — | Public Domain |
 
