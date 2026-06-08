@@ -9,7 +9,8 @@
     "total_titles": 27,
     "al_pennants": 40,
     "chasing_number": 28,
-    "source_note": "Records and postseason results from Baseball-Reference / MLB.com; payroll context from public luxury-tax reporting. Regenerate via scripts/update_data.py."
+    "current_season": null,
+    "source_note": "Records and postseason results from Baseball-Reference / MLB.com; payroll context from public luxury-tax reporting. Current-season record is pulled live from the MLB Stats API. Regenerate via scripts/update_data.py."
   },
   "titles": [
     1923,

@@ -1,64 +1,96 @@
-name: Deploy to GitHub Pages
+name: Deploy
 
-# Publishes the static scrollytelling site to GitHub Pages.
-# Runs on pushes to the development branch (and main, if/when merged),
-# and can be triggered manually from the Actions tab.
+# Publishes the static site to the shared web host over SFTP, landing at
+# mqsandbox.com/yankees. Runs on every push to main (the data-update cron
+# pushes to main, which triggers this) and can be run manually.
+#
+# Required repo secrets (same set as the other mqsandbox.com projects):
+#   SFTP_HOST, SFTP_USERNAME, SFTP_PASSWORD, SFTP_REMOTE_PATH
+#   SFTP_PORT (optional, defaults to 22)
+# SFTP_REMOTE_PATH must point at this project's folder on the host
+# (e.g. the .../yankees directory served at mqsandbox.com/yankees).
 
 on:
   push:
-    branches:
-      - claude/confident-planck-GGCL0
-      - main
+    branches: [main]
   workflow_dispatch:
 
-# Allow the workflow to publish Pages.
+concurrency:
+  group: deploy-main
+  cancel-in-progress: true
+
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-# One deploy at a time; let an in-progress run finish.
-concurrency:
-  group: pages
-  cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
+      - name: Stage static site
+        run: |
+          set -euo pipefail
+          rm -rf site && mkdir -p site
+          cp index.html site/
+          cp -R assets site/
+          cp -R data site/
+          find site -type f | sort
 
-      # Regenerate data/yankees.json from the researched constants so the
-      # published JSON is always in step with scripts/update_data.py.
-      - name: Regenerate data
-        run: python3 scripts/update_data.py
+      - name: Upload site via scp (SFTP-compatible)
+        env:
+          SSHPASS:     ${{ secrets.SFTP_PASSWORD }}
+          DEPLOY_HOST: ${{ secrets.SFTP_HOST }}
+          DEPLOY_USER: ${{ secrets.SFTP_USERNAME }}
+          DEPLOY_PORT: ${{ secrets.SFTP_PORT || '22' }}
+          DEPLOY_PATH: ${{ secrets.SFTP_REMOTE_PATH }}
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y sshpass
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-        with:
-          # Auto-enable Pages (with GitHub Actions as the source) on first run,
-          # so no manual repo-settings toggle is needed.
-          enablement: true
+          DEPLOY_PORT="${DEPLOY_PORT:-22}"
+          if ! [[ "${DEPLOY_PORT}" =~ ^[0-9]+$ ]]; then
+            echo "::error::SFTP_PORT must be numeric (1-65535). Got: '${DEPLOY_PORT}'"
+            exit 1
+          fi
+          if [ "${DEPLOY_PORT}" -lt 1 ] || [ "${DEPLOY_PORT}" -gt 65535 ]; then
+            echo "::error::SFTP_PORT out of range (1-65535): ${DEPLOY_PORT}"
+            exit 1
+          fi
 
-      # The site is static at the repo root — upload the whole tree.
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
+          : "${DEPLOY_HOST:?SFTP_HOST secret is required}"
+          : "${DEPLOY_USER:?SFTP_USERNAME secret is required}"
+          : "${DEPLOY_PATH:?SFTP_REMOTE_PATH secret is required}"
+          : "${SSHPASS:?SFTP_PASSWORD secret is required}"
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          export SSHPASS
+          REMOTE_BASE="${DEPLOY_PATH%/}"
+          cd site
+          sshpass -e scp -r -P "${DEPLOY_PORT}" \
+            -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+            . "${DEPLOY_USER}@${DEPLOY_HOST}:${REMOTE_BASE}/"
+
+      - name: Verify deploy landed
+        env:
+          SSHPASS:     ${{ secrets.SFTP_PASSWORD }}
+          DEPLOY_HOST: ${{ secrets.SFTP_HOST }}
+          DEPLOY_USER: ${{ secrets.SFTP_USERNAME }}
+          DEPLOY_PORT: ${{ secrets.SFTP_PORT || '22' }}
+          DEPLOY_PATH: ${{ secrets.SFTP_REMOTE_PATH }}
+        run: |
+          set -euo pipefail
+          DEPLOY_PORT="${DEPLOY_PORT:-22}"
+          export SSHPASS
+          REMOTE_BASE="${DEPLOY_PATH%/}"
+          sshpass -e ssh -p "${DEPLOY_PORT}" \
+            -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+            "${DEPLOY_USER}@${DEPLOY_HOST}" \
+            "test -f '${REMOTE_BASE}/index.html' && \
+             test -f '${REMOTE_BASE}/assets/yanks.webp' && \
+             ls -la '${REMOTE_BASE}'"
+
+      - name: Deployment summary
+        run: echo "✓ Deployed to ${{ secrets.SFTP_HOST }} → mqsandbox.com/yankees"

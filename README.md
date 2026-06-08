@@ -40,9 +40,33 @@ python3 scripts/update_data.py
 
 `index.html` fetches `data/yankees.json` at runtime and also carries an inline
 copy as a `file://` fallback, so it renders even when opened directly without a
-server. After editing the data, re-run the script **and** keep that inline
-`<script id="fallback-data">` block in `index.html` in sync (the script prints
-a reminder; the inline block is just a verbatim copy of the JSON).
+server. `update_data.py` keeps the two in sync automatically — it rewrites the
+inline `<script id="fallback-data">` block in `index.html` every time it runs.
+
+The updater also pulls the **current-season record** live from the free
+[MLB Stats API](https://statsapi.mlb.com) (`statsapi.mlb.com`, no key) and writes
+it to `meta.current_season`, which the page shows as a "This season" line in the
+*Why Now* section. Everything historical (titles, the drought, near-misses) stays
+anchored to the researched constants in `update_data.py`; if the API is
+unreachable, the build falls back to constants and never fails.
+
+## Hosting & self-update (mqsandbox.com/yankees)
+
+The site is served from the shared web host at **mqsandbox.com/yankees** (not
+GitHub Pages), and keeps itself current via three workflows:
+
+| Workflow | Trigger | Does |
+|---|---|---|
+| `.github/workflows/update-yankees-data.yml` | weekly cron (Mon 06:00 UTC) + manual | regenerates data (live current-season record), commits to `main` if changed |
+| `.github/workflows/deploy.yml` | push to `main` + manual | SFTPs `index.html` + `assets/` + `data/` to the host → `mqsandbox.com/yankees` |
+| `.github/workflows/keepalive.yml` | monthly cron | tiny commit so GitHub never auto-pauses the scheduled jobs |
+
+The weekly data commit lands on `main`, which triggers the deploy — so the page
+re-publishes itself with no manual step.
+
+**Required repo secrets** (same set as the other mqsandbox.com projects):
+`SFTP_HOST`, `SFTP_USERNAME`, `SFTP_PASSWORD`, `SFTP_REMOTE_PATH` (point it at the
+host's `yankees` folder), and optionally `SFTP_PORT` (defaults to 22).
 
 ## Style
 

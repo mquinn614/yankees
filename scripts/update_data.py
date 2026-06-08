@@ -22,7 +22,47 @@ Sources to verify against when updating:
 
 import json
 import os
+import re
+import urllib.request
 from datetime import date
+
+# ---------------------------------------------------------------------------
+# Live data: current-season record from the free MLB Stats API (no key).
+# This is what makes the page self-updating on a weekly cron: the Yankees'
+# in-season W-L (and the as-of date) refresh automatically. Everything else
+# (titles, the historical drought, near-misses) stays anchored to the
+# researched constants below. If the API is unreachable the build silently
+# falls back to constants and never fails.
+# ---------------------------------------------------------------------------
+
+MLB_TEAM_ID = 147        # New York Yankees
+AL_LEAGUE_ID = 103       # American League
+
+
+def _target_season(today):
+    """The season to report a live record for. During Jan/Feb there is no
+    active season, so fall back to the prior year."""
+    return today.year - 1 if today.month <= 2 else today.year
+
+
+def fetch_current_record(year):
+    """Return (wins, losses) for the Yankees in `year`, or None on any failure."""
+    url = (
+        "https://statsapi.mlb.com/api/v1/standings"
+        f"?leagueId={AL_LEAGUE_ID}&season={year}&standingsTypes=regularSeason"
+    )
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "yankees-scrolly/1.0"})
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            payload = json.load(resp)
+        for record in payload.get("records", []):
+            for tr in record.get("teamRecords", []):
+                if tr.get("team", {}).get("id") == MLB_TEAM_ID:
+                    return int(tr["wins"]), int(tr["losses"])
+        print(f"  (live fetch: Yankees not found in {year} standings; using constants)")
+    except Exception as exc:  # network error, JSON error, schema drift, etc.
+        print(f"  (live fetch failed: {exc}; using constants)")
+    return None
 
 # ---------------------------------------------------------------------------
 # Core franchise numbers
@@ -193,19 +233,35 @@ def build():
         summary["playoff_appearances"] / summary["seasons"], 2
     )
     drought_seasons = THROUGH_SEASON - LAST_TITLE_YEAR
+
+    today = date.today()
+    season = _target_season(today)
+    current_season = None
+    live = fetch_current_record(season)
+    if live:
+        wins, losses = live
+        current_season = {
+            "year": season,
+            "wins": wins,
+            "losses": losses,
+            "as_of": today.isoformat(),
+        }
+
     return {
         "meta": {
             "team": "New York Yankees",
             "headline": "They're Due",
-            "updated": date.today().isoformat(),
+            "updated": today.isoformat(),
             "through_season": THROUGH_SEASON,
             "last_title_year": LAST_TITLE_YEAR,
             "drought_seasons": drought_seasons,
             "total_titles": TOTAL_TITLES,
             "al_pennants": AL_PENNANTS,
             "chasing_number": CHASING_NUMBER,
+            "current_season": current_season,
             "source_note": "Records and postseason results from Baseball-Reference / MLB.com; "
-                           "payroll context from public luxury-tax reporting. Regenerate via "
+                           "payroll context from public luxury-tax reporting. Current-season "
+                           "record is pulled live from the MLB Stats API. Regenerate via "
                            "scripts/update_data.py.",
         },
         "titles": TITLES,
@@ -219,19 +275,51 @@ def build():
     }
 
 
+FALLBACK_OPEN = '<script id="fallback-data" type="application/json">'
+FALLBACK_CLOSE = "</script>"
+
+
+def sync_inline_fallback(index_path, json_text):
+    """Rewrite the inline file:// fallback block in index.html so it always
+    matches data/yankees.json (keeps the two in sync automatically)."""
+    if not os.path.exists(index_path):
+        return False
+    html = open(index_path, encoding="utf-8").read()
+    start = html.find(FALLBACK_OPEN)
+    if start == -1:
+        return False
+    inner = start + len(FALLBACK_OPEN)
+    end = html.find(FALLBACK_CLOSE, inner)
+    if end == -1:
+        return False
+    new_html = html[:inner] + "\n" + json_text + "\n" + html[end:]
+    if new_html != html:
+        open(index_path, "w", encoding="utf-8").write(new_html)
+        return True
+    return False
+
+
 def main():
     data = build()
     here = os.path.dirname(os.path.abspath(__file__))
     out_path = os.path.normpath(os.path.join(here, "..", "data", "yankees.json"))
+    index_path = os.path.normpath(os.path.join(here, "..", "index.html"))
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
-    with open(out_path, "w") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
-        f.write("\n")
+
+    json_text = json.dumps(data, indent=2, ensure_ascii=False)
+    with open(out_path, "w", encoding="utf-8") as f:
+        f.write(json_text + "\n")
+    synced = sync_inline_fallback(index_path, json_text)
+
+    cur = data["meta"]["current_season"]
     print(f"Wrote {out_path}")
     print(f"  {data['meta']['total_titles']} titles · "
           f"{data['meta']['drought_seasons']}-season drought · "
           f"chasing #{data['meta']['chasing_number']}")
-    print("  Reminder: keep the inline fallback block in index.html in sync with this JSON.")
+    if cur:
+        print(f"  live {cur['year']} record: {cur['wins']}-{cur['losses']} "
+              f"(as of {cur['as_of']})")
+    print(f"  inline fallback in index.html: {'updated' if synced else 'unchanged'}")
 
 
 if __name__ == "__main__":

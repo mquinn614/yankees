@@ -1,0 +1,46 @@
+name: Update Yankees data
+
+# Weekly self-update: regenerate data/yankees.json (which also pulls the
+# current-season record live from the MLB Stats API and re-syncs the inline
+# fallback inside index.html). If anything changed, commit to main — which
+# triggers the Deploy workflow and republishes mqsandbox.com/yankees.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"   # Mondays, 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Regenerate data (live current-season record + inline fallback)
+        run: python3 scripts/update_data.py
+
+      - name: Commit if changed
+        run: |
+          set -euo pipefail
+          if [[ -n "$(git status --porcelain data/yankees.json index.html)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/yankees.json index.html
+            git commit -m "Auto-update Yankees data (current-season record refresh)"
+            git push
+          else
+            echo "No data changes."
+          fi
