@@ -66,7 +66,8 @@ re-publishes itself with no manual step.
 
 **Required repo secrets** (same set as the other mqsandbox.com projects):
 `SFTP_HOST`, `SFTP_USERNAME`, `SFTP_PASSWORD`, `SFTP_REMOTE_PATH` (point it at the
-host's `yankees` folder), and optionally `SFTP_PORT` (defaults to 22).
+host's `yankees` folder), and optionally `SFTP_PORT` (defaults to 2222, the
+usual Bluehost SSH port).
 
 ## Style
 

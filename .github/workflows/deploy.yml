@@ -44,14 +44,14 @@ jobs:
           SSHPASS:     ${{ secrets.SFTP_PASSWORD }}
           DEPLOY_HOST: ${{ secrets.SFTP_HOST }}
           DEPLOY_USER: ${{ secrets.SFTP_USERNAME }}
-          DEPLOY_PORT: ${{ secrets.SFTP_PORT || '22' }}
+          DEPLOY_PORT: ${{ secrets.SFTP_PORT || '2222' }}
           DEPLOY_PATH: ${{ secrets.SFTP_REMOTE_PATH }}
         run: |
           set -euo pipefail
           sudo apt-get update -qq
           sudo apt-get install -y sshpass
 
-          DEPLOY_PORT="${DEPLOY_PORT:-22}"
+          DEPLOY_PORT="${DEPLOY_PORT:-2222}"
           if ! [[ "${DEPLOY_PORT}" =~ ^[0-9]+$ ]]; then
             echo "::error::SFTP_PORT must be numeric (1-65535). Got: '${DEPLOY_PORT}'"
             exit 1
@@ -73,11 +73,11 @@ jobs:
           SSHPASS:     ${{ secrets.SFTP_PASSWORD }}
           DEPLOY_HOST: ${{ secrets.SFTP_HOST }}
           DEPLOY_USER: ${{ secrets.SFTP_USERNAME }}
-          DEPLOY_PORT: ${{ secrets.SFTP_PORT || '22' }}
+          DEPLOY_PORT: ${{ secrets.SFTP_PORT || '2222' }}
           DEPLOY_PATH: ${{ secrets.SFTP_REMOTE_PATH }}
         run: |
           set -euo pipefail
-          DEPLOY_PORT="${DEPLOY_PORT:-22}"
+          DEPLOY_PORT="${DEPLOY_PORT:-2222}"
           export SSHPASS
           REMOTE_BASE="${DEPLOY_PATH%/}"
           sshpass -e ssh -p "${DEPLOY_PORT}" \
@@ -90,11 +90,11 @@ jobs:
           SSHPASS:     ${{ secrets.SFTP_PASSWORD }}
           DEPLOY_HOST: ${{ secrets.SFTP_HOST }}
           DEPLOY_USER: ${{ secrets.SFTP_USERNAME }}
-          DEPLOY_PORT: ${{ secrets.SFTP_PORT || '22' }}
+          DEPLOY_PORT: ${{ secrets.SFTP_PORT || '2222' }}
           DEPLOY_PATH: ${{ secrets.SFTP_REMOTE_PATH }}
         run: |
           set -euo pipefail
-          DEPLOY_PORT="${DEPLOY_PORT:-22}"
+          DEPLOY_PORT="${DEPLOY_PORT:-2222}"
           export SSHPASS
           REMOTE_BASE="${DEPLOY_PATH%/}"
           cd site
@@ -107,11 +107,11 @@ jobs:
           SSHPASS:     ${{ secrets.SFTP_PASSWORD }}
           DEPLOY_HOST: ${{ secrets.SFTP_HOST }}
           DEPLOY_USER: ${{ secrets.SFTP_USERNAME }}
-          DEPLOY_PORT: ${{ secrets.SFTP_PORT || '22' }}
+          DEPLOY_PORT: ${{ secrets.SFTP_PORT || '2222' }}
           DEPLOY_PATH: ${{ secrets.SFTP_REMOTE_PATH }}
         run: |
           set -euo pipefail
-          DEPLOY_PORT="${DEPLOY_PORT:-22}"
+          DEPLOY_PORT="${DEPLOY_PORT:-2222}"
           export SSHPASS
           REMOTE_BASE="${DEPLOY_PATH%/}"
           sshpass -e ssh -p "${DEPLOY_PORT}" \
