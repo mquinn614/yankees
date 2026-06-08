@@ -165,10 +165,11 @@
   .cliff .sec-head h2, .cliff .kicker.ink{color:var(--white);}
   .cliff .sec-head .stand{color:rgba(255,255,255,.78);}
   .cliff-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:48px; align-items:center;}
+  .cliff-grid > *{min-width:0;}
   .cliff-photo{aspect-ratio:4/5; border-radius:3px;}
   .timeline-titles{margin-top:1.5rem;}
-  .tl-track{display:flex; align-items:flex-end; gap:3px; height:120px; margin-top:1rem;}
-  .tl-tick{flex:1 1 0; background:var(--gold); opacity:.92; border-radius:1px 1px 0 0; min-width:2px;}
+  .tl-track{display:flex; align-items:flex-end; gap:3px; height:120px; margin-top:1rem; width:100%; overflow:hidden;}
+  .tl-tick{flex:1 1 0; min-width:0; background:var(--gold); opacity:.92; border-radius:1px 1px 0 0;}
   .tl-tick.gap{background:rgba(255,255,255,.14);}
   .tl-cap{display:flex; justify-content:space-between; font-family:var(--mono); font-size:12px; color:rgba(255,255,255,.6); margin-top:.7rem;}
   .pullquote{font-family:var(--serif-display); font-weight:700; font-style:italic; font-size:clamp(24px,3.4vw,38px); line-height:1.22; color:var(--white);}
@@ -292,6 +293,7 @@
     .hero-stats{gap:1.4rem;}
     .bars{gap:3px;}
     .bcol .yr{font-size:8px;}
+    .tl-track{gap:1px; height:96px;}
   }
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
