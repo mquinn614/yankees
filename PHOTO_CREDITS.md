@@ -12,7 +12,7 @@ this file accurate and linked from the page footer.
 
 | Slot (`assets/…`) | Source file (Wikimedia Commons) | Author | License |
 |---|---|---|---|
-| `yankees.webp` | *user-supplied* | *add source/author* | *add license* |
+| `yanks.webp` | *user-supplied* | *add source/author* | *add license* |
 | `2009.jpg`   | [Yankee Stadium 2009.jpg](https://commons.wikimedia.org/wiki/File:Yankee_Stadium_2009.jpg) | *confirm on file page* | CC BY 2.0 |
 | `judge.jpg`  | [Aaron Judge.jpg](https://commons.wikimedia.org/wiki/File:Aaron_Judge.jpg) | Keith Allison | CC BY-SA 2.0 |
 | `closer.jpg` | [Yankee Stadium from Coogan's Bluff.JPG](https://commons.wikimedia.org/wiki/File:Yankee_Stadium_from_Coogan%27s_Bluff.JPG) | Delaywaves | CC BY 3.0 |

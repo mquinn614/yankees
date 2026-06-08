@@ -13,7 +13,7 @@ with the matching name, it swaps in automatically (handled by `loadPhotos()`).
 
 | File              | Where it appears        | Treatment        | Suggested shot |
 |-------------------|-------------------------|------------------|----------------|
-| `yankees.webp`    | Full-screen hero        | navy duotone     | Wide Yankee Stadium / crowd / championship celebration. Landscape, ≥2000px wide. |
+| `yanks.webp`    | Full-screen hero        | navy duotone     | Wide Yankee Stadium / crowd / championship celebration. Landscape, ≥2000px wide. |
 | `2009.jpg`        | "The 2009 Cliff"        | navy→gold duotone| 2009 World Series celebration / trophy. Portrait (4:5) works best. |
 | `judge.jpg`       | "Why Now" anchor card   | navy→gold duotone| Aaron Judge batting / portrait. Landscape (5:4). |
 | `closer.jpg`      | Closing section         | navy duotone (darkened) | Stadium at night / empty diamond / iconic façade. Landscape. |
