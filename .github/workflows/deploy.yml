@@ -1,0 +1,60 @@
+name: Deploy to GitHub Pages
+
+# Publishes the static scrollytelling site to GitHub Pages.
+# Runs on pushes to the development branch (and main, if/when merged),
+# and can be triggered manually from the Actions tab.
+
+on:
+  push:
+    branches:
+      - claude/confident-planck-GGCL0
+      - main
+  workflow_dispatch:
+
+# Allow the workflow to publish Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time; let an in-progress run finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Regenerate data/yankees.json from the researched constants so the
+      # published JSON is always in step with scripts/update_data.py.
+      - name: Regenerate data
+        run: python3 scripts/update_data.py
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      # The site is static at the repo root — upload the whole tree.
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
