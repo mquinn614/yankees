@@ -1,0 +1,345 @@
+{
+  "meta": {
+    "team": "New York Yankees",
+    "headline": "They're Due",
+    "updated": "2026-06-08",
+    "through_season": 2025,
+    "last_title_year": 2009,
+    "drought_seasons": 16,
+    "total_titles": 27,
+    "al_pennants": 40,
+    "chasing_number": 28,
+    "source_note": "Records and postseason results from Baseball-Reference / MLB.com; payroll context from public luxury-tax reporting. Regenerate via scripts/update_data.py."
+  },
+  "titles": [
+    1923,
+    1927,
+    1928,
+    1932,
+    1936,
+    1937,
+    1938,
+    1939,
+    1941,
+    1943,
+    1947,
+    1949,
+    1950,
+    1951,
+    1952,
+    1953,
+    1956,
+    1958,
+    1961,
+    1962,
+    1977,
+    1978,
+    1996,
+    1998,
+    1999,
+    2000,
+    2009
+  ],
+  "titles_by_decade": [
+    {
+      "decade": "1920s",
+      "count": 3
+    },
+    {
+      "decade": "1930s",
+      "count": 5
+    },
+    {
+      "decade": "1940s",
+      "count": 4
+    },
+    {
+      "decade": "1950s",
+      "count": 6
+    },
+    {
+      "decade": "1960s",
+      "count": 2
+    },
+    {
+      "decade": "1970s",
+      "count": 2
+    },
+    {
+      "decade": "1980s",
+      "count": 0
+    },
+    {
+      "decade": "1990s",
+      "count": 3
+    },
+    {
+      "decade": "2000s",
+      "count": 2
+    },
+    {
+      "decade": "2010s",
+      "count": 0
+    },
+    {
+      "decade": "2020s",
+      "count": 0
+    }
+  ],
+  "historical_droughts": [
+    {
+      "span": "1962–1977",
+      "years": 15,
+      "ongoing": false
+    },
+    {
+      "span": "1978–1996",
+      "years": 18,
+      "ongoing": false
+    },
+    {
+      "span": "2000–2009",
+      "years": 9,
+      "ongoing": false
+    },
+    {
+      "span": "2009–present",
+      "years": 16,
+      "ongoing": true
+    }
+  ],
+  "drought_years": [
+    {
+      "year": 2010,
+      "wins": 95,
+      "losses": 67,
+      "playoffs": true,
+      "round": "ALCS",
+      "exit": "Lost ALCS",
+      "opponent": "Texas Rangers",
+      "series": "2–4",
+      "note": "Cliff Lee and a young Rangers club end the title defense one round from the pennant."
+    },
+    {
+      "year": 2011,
+      "wins": 97,
+      "losses": 65,
+      "playoffs": true,
+      "round": "ALDS",
+      "exit": "Lost ALDS",
+      "opponent": "Detroit Tigers",
+      "series": "2–3",
+      "note": "Best record in the AL, out in five. Game 5 lost at home."
+    },
+    {
+      "year": 2012,
+      "wins": 95,
+      "losses": 67,
+      "playoffs": true,
+      "round": "ALCS",
+      "exit": "Lost ALCS",
+      "opponent": "Detroit Tigers",
+      "series": "0–4",
+      "note": "Swept. The lineup goes cold; Jeter breaks his ankle in Game 1."
+    },
+    {
+      "year": 2013,
+      "wins": 85,
+      "losses": 77,
+      "playoffs": false,
+      "round": "DNQ",
+      "exit": "Missed playoffs",
+      "opponent": null,
+      "series": null,
+      "note": "Jeter's farewell-year injuries; first October at home since 2008."
+    },
+    {
+      "year": 2014,
+      "wins": 84,
+      "losses": 78,
+      "playoffs": false,
+      "round": "DNQ",
+      "exit": "Missed playoffs",
+      "opponent": null,
+      "series": null,
+      "note": "Jeter's actual farewell. Back-to-back misses for the first time in two decades."
+    },
+    {
+      "year": 2015,
+      "wins": 87,
+      "losses": 75,
+      "playoffs": true,
+      "round": "WCS",
+      "exit": "Lost Wild Card Game",
+      "opponent": "Houston Astros",
+      "series": "0–1",
+      "note": "Shut out by Dallas Keuchel. One game, one night, done."
+    },
+    {
+      "year": 2016,
+      "wins": 84,
+      "losses": 78,
+      "playoffs": false,
+      "round": "DNQ",
+      "exit": "Missed playoffs",
+      "opponent": null,
+      "series": null,
+      "note": "Deadline sell-off. The Judge/Sánchez core debuts in the wreckage."
+    },
+    {
+      "year": 2017,
+      "wins": 91,
+      "losses": 71,
+      "playoffs": true,
+      "round": "ALCS",
+      "exit": "Lost ALCS",
+      "opponent": "Houston Astros",
+      "series": "3–4",
+      "note": "Up 3–2, one win from the pennant — then shut out twice in Houston. The Astros were later found to have stolen signs."
+    },
+    {
+      "year": 2018,
+      "wins": 100,
+      "losses": 62,
+      "playoffs": true,
+      "round": "ALDS",
+      "exit": "Lost ALDS",
+      "opponent": "Boston Red Sox",
+      "series": "1–3",
+      "note": "100 wins, but the 108-win Red Sox roll them and win it all."
+    },
+    {
+      "year": 2019,
+      "wins": 103,
+      "losses": 59,
+      "playoffs": true,
+      "round": "ALCS",
+      "exit": "Lost ALCS",
+      "opponent": "Houston Astros",
+      "series": "2–4",
+      "note": "103 wins. José Altuve's walk-off homer off Chapman ends Game 6 — and the season."
+    },
+    {
+      "year": 2020,
+      "wins": 33,
+      "losses": 27,
+      "playoffs": true,
+      "round": "ALDS",
+      "exit": "Lost ALDS",
+      "opponent": "Tampa Bay Rays",
+      "series": "2–3",
+      "note": "The 60-game year. Five-game ALDS lost in the bubble to the division-rival Rays."
+    },
+    {
+      "year": 2021,
+      "wins": 92,
+      "losses": 70,
+      "playoffs": true,
+      "round": "WCS",
+      "exit": "Lost Wild Card Game",
+      "opponent": "Boston Red Sox",
+      "series": "0–1",
+      "note": "One-game playoff at Fenway. Out before the series rounds even begin."
+    },
+    {
+      "year": 2022,
+      "wins": 99,
+      "losses": 63,
+      "playoffs": true,
+      "round": "ALCS",
+      "exit": "Lost ALCS",
+      "opponent": "Houston Astros",
+      "series": "0–4",
+      "note": "Aaron Judge's 62-homer season ends in a four-game sweep by Houston."
+    },
+    {
+      "year": 2023,
+      "wins": 82,
+      "losses": 80,
+      "playoffs": false,
+      "round": "DNQ",
+      "exit": "Missed playoffs",
+      "opponent": null,
+      "series": null,
+      "note": "First losing-adjacent season since 1992 — 82–80, no October at all."
+    },
+    {
+      "year": 2024,
+      "wins": 94,
+      "losses": 68,
+      "playoffs": true,
+      "round": "WS",
+      "exit": "Lost World Series",
+      "opponent": "Los Angeles Dodgers",
+      "series": "1–4",
+      "note": "First pennant since 2009 — then a Game 5 unraveling hands the Dodgers the title."
+    },
+    {
+      "year": 2025,
+      "wins": 94,
+      "losses": 68,
+      "playoffs": true,
+      "round": "ALDS",
+      "exit": "Lost ALDS",
+      "opponent": "Toronto Blue Jays",
+      "series": "1–3",
+      "note": "Back to October, past Boston in the Wild Card round, then out in the division series."
+    }
+  ],
+  "drought_summary": {
+    "seasons": 16,
+    "playoff_appearances": 12,
+    "missed_playoffs": 4,
+    "alcs_or_deeper": 6,
+    "pennants": 1,
+    "titles": 0,
+    "hundred_win_seasons": 2,
+    "total_regular_season_wins": 1415
+  },
+  "near_misses": [
+    {
+      "year": 2017,
+      "stage": "ALCS Game 7",
+      "opponent": "Houston Astros",
+      "how_close": "1 win from the pennant",
+      "detail": "Led the series 3–2, then was shut out in Games 6 and 7 in Houston — the Astros later admitted to an illegal sign-stealing scheme that season."
+    },
+    {
+      "year": 2019,
+      "stage": "ALCS Game 6",
+      "opponent": "Houston Astros",
+      "how_close": "1 swing from Game 7",
+      "detail": "José Altuve's two-run walk-off homer off Aroldis Chapman ended the pennant on the spot."
+    },
+    {
+      "year": 2024,
+      "stage": "World Series Game 5",
+      "opponent": "Los Angeles Dodgers",
+      "how_close": "1 inning from forcing Game 6",
+      "detail": "Led 5–0 in the clincher; a five-run fifth — fueled by defensive misplays — turned the title over to Los Angeles."
+    }
+  ],
+  "why_now": {
+    "anchor": {
+      "name": "Aaron Judge",
+      "role": "Captain · CF/RF",
+      "mvps": "2× AL MVP (2022, 2024)",
+      "calling_card": "62 HR in 2022 — the AL single-season record"
+    },
+    "payroll": {
+      "approx_usd_millions": 300,
+      "rank_note": "Among the top of MLB in payroll and luxury-tax spending every year of the drought"
+    },
+    "window": [
+      "A generational hitter in his prime anchoring the lineup as captain.",
+      "A top-of-market payroll and a front office that spends to win now.",
+      "Twelve playoff trips in sixteen years — the door has never really closed.",
+      "A 2024 pennant proved the roster can reach the final stage; the last step is all that's left."
+    ]
+  },
+  "due_case": {
+    "avg_years_between_titles_1923_2009": 3.3,
+    "playoff_rate_drought": 0.75,
+    "longest_modern_drought_context": "the longest the Yankees have gone without a title since their late-1990s dynasty began"
+  }
+}
