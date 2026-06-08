@@ -1,40 +1,21 @@
 # Photo credits
 
-The four photo slots use freely-licensed images sourced from **Wikimedia
-Commons**. These licenses (CC BY / CC BY-SA) require **attribution** — keep
-this file accurate and linked from the page footer.
+The photos used on the page are **public domain**.
 
-> ⚠️ Before publishing, open each file's Commons page and confirm the author
-> name and license shown here still match (a couple of authors below are marked
-> "confirm on file page" because the metadata wasn't machine-readable at search
-> time). CC BY-SA also requires noting that the image is shared under the same
-> license.
-
-| Slot (`assets/…`) | Source file (Wikimedia Commons) | Author | License |
+| Slot | File (`assets/…`) | Author | License |
 |---|---|---|---|
-| `yanks.webp` | Public domain | — | Public Domain |
-| `jeter.jpg` (2009 slot) | *user-supplied* | *add source/author* | *add license* |
-| `judge.jpg`  | [Aaron Judge.jpg](https://commons.wikimedia.org/wiki/File:Aaron_Judge.jpg) | Keith Allison | CC BY-SA 2.0 |
-| `closer.jpg` | [Yankee Stadium from Coogan's Bluff.JPG](https://commons.wikimedia.org/wiki/File:Yankee_Stadium_from_Coogan%27s_Bluff.JPG) | Delaywaves | CC BY 3.0 |
+| Hero            | `yanks.webp` | — | Public Domain |
+| The 2009 Cliff  | `jeter.jpg`  | — | Public Domain |
+| Why Now (Judge) | `judge.webp` | — | Public Domain |
+| Closer          | `closer.*` *(pending)* | — | Public Domain |
 
-## Direct download links
+## Alternative (Creative Commons) sources
 
-`Special:FilePath` redirects to the original file; append `?width=2400` for a
-scaled JPEG (recommended for the big landscape slots to keep file size down).
+If you ever want to swap in a different image, these Wikimedia Commons files are
+freely licensed. Note: CC BY / CC BY-SA require **attribution** — if you use one
+of these, add its author + license to the table above.
 
-- **hero.jpg** → https://commons.wikimedia.org/wiki/Special:FilePath/Yankee_Stadium_upper_deck_2010.jpg?width=2400
-- **2009.jpg** → https://commons.wikimedia.org/wiki/Special:FilePath/Yankee_Stadium_2009.jpg
-- **judge.jpg** → https://commons.wikimedia.org/wiki/Special:FilePath/Aaron_Judge.jpg
-- **closer.jpg** → https://commons.wikimedia.org/wiki/Special:FilePath/Yankee_Stadium_from_Coogan%27s_Bluff.JPG?width=2400
-
-Save each into `assets/` under the slot filename, then commit — the deploy
-workflow republishes automatically and the duotone treatment is applied in the
-browser.
-
-## Note on the 2009 celebration
-
-The *iconic* on-field celebration / trophy photos from the 2009 World Series
-are almost all **copyrighted** (Getty / AP / MLB) and are **not** cleared for
-reuse here. The `2009.jpg` pick above is a free, championship-season stadium
-image as a safe stand-in. If you have a licensed celebration shot (or rights to
-one), drop it in at `assets/2009.jpg` and update this row.
+- Hero idea → [Yankee Stadium upper deck 2010.jpg](https://commons.wikimedia.org/wiki/File:Yankee_Stadium_upper_deck_2010.jpg) (CC BY-SA 2.0) · [download](https://commons.wikimedia.org/wiki/Special:FilePath/Yankee_Stadium_upper_deck_2010.jpg?width=2400)
+- 2009 idea → [Yankee Stadium 2009.jpg](https://commons.wikimedia.org/wiki/File:Yankee_Stadium_2009.jpg) (CC BY 2.0) · [download](https://commons.wikimedia.org/wiki/Special:FilePath/Yankee_Stadium_2009.jpg)
+- Judge idea → [Aaron Judge.jpg](https://commons.wikimedia.org/wiki/File:Aaron_Judge.jpg) by Keith Allison (CC BY-SA 2.0) · [download](https://commons.wikimedia.org/wiki/Special:FilePath/Aaron_Judge.jpg)
+- Closer idea → [Yankee Stadium from Coogan's Bluff.JPG](https://commons.wikimedia.org/wiki/File:Yankee_Stadium_from_Coogan%27s_Bluff.JPG) by Delaywaves (CC BY 3.0) · [download](https://commons.wikimedia.org/wiki/Special:FilePath/Yankee_Stadium_from_Coogan%27s_Bluff.JPG?width=2400)
