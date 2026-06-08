@@ -7,7 +7,7 @@ The photos used on the page are **public domain**.
 | Hero            | `yanks.webp` | — | Public Domain |
 | The 2009 Cliff  | `jeter.jpg`  | — | Public Domain |
 | Why Now (Judge) | `judge.webp` | — | Public Domain |
-| Closer          | `closer.*` *(pending)* | — | Public Domain |
+| Closer          | `stadium.jpg` | — | Public Domain |
 
 ## Alternative (Creative Commons) sources
 
