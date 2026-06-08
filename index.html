@@ -376,8 +376,8 @@
     </div>
     <div class="cliff-grid">
       <div class="reveal">
-        <div class="photo gold cliff-photo placeholder" data-photo="assets/2009.jpg" data-caption="2009 World Series celebration → assets/2009.jpg">
-          <span class="ph-note">assets/2009.jpg</span>
+        <div class="photo gold cliff-photo placeholder" data-photo="assets/2009.webp, assets/2009.jpg, assets/2009.png" data-caption="2009 World Series">
+          <span class="ph-note">assets/2009.webp · .jpg · .png</span>
         </div>
       </div>
       <div class="reveal">
@@ -466,8 +466,8 @@
     <div class="why-grid">
       <div class="reveal">
         <div class="anchor-card">
-          <div class="photo gold placeholder" data-photo="assets/judge.jpg" data-caption="Aaron Judge → assets/judge.jpg">
-            <span class="ph-note">assets/judge.jpg</span>
+          <div class="photo gold placeholder" data-photo="assets/judge.webp, assets/judge.jpg, assets/judge.png" data-caption="Aaron Judge">
+            <span class="ph-note">assets/judge.webp · .jpg · .png</span>
           </div>
           <div class="anchor-body">
             <div class="an" data-bind="why.anchor.name">Aaron Judge</div>
@@ -489,8 +489,8 @@
 
 <!-- ===================== CLOSER ===================== -->
 <section class="closer section-pad">
-  <div class="photo placeholder" data-photo="assets/closer.jpg" data-caption="Closer / stadium-at-night photo → assets/closer.jpg">
-    <span class="ph-note">assets/closer.jpg</span>
+  <div class="photo placeholder" data-photo="assets/closer.webp, assets/closer.jpg, assets/closer.png" data-caption="Yankee Stadium">
+    <span class="ph-note">assets/closer.webp · .jpg · .png</span>
   </div>
   <div class="closer-inner wrap">
     <div class="kicker">The Case</div>
@@ -1079,9 +1079,13 @@
   // ---------- swap in real photos if the files exist; else keep placeholder ----------
   function loadPhotos(){
     document.querySelectorAll('.photo[data-photo]').forEach(function(box){
-      var src = box.getAttribute('data-photo');
-      var img = new Image();
-      img.onload = function(){
+      // data-photo may list several candidate files (comma-separated); the
+      // first one that loads wins. Lets you drop in e.g. judge.webp OR
+      // judge.jpg without touching the markup.
+      var candidates = box.getAttribute('data-photo').split(',')
+        .map(function(s){ return s.trim(); }).filter(Boolean);
+
+      function swapIn(src){
         box.classList.remove('placeholder');
         var note = box.querySelector('.ph-note'); if(note) note.remove();
         var el = document.createElement('img');
@@ -1091,9 +1095,15 @@
         box.insertBefore(el, box.firstChild);
         var scrim = document.createElement('div'); scrim.className='scrim';
         box.appendChild(scrim);
-      };
-      img.onerror = function(){ /* leave the editorial placeholder in place */ };
-      img.src = src;
+      }
+
+      (function tryNext(i){
+        if(i >= candidates.length) return; // none found: keep the placeholder
+        var img = new Image();
+        img.onload = function(){ swapIn(candidates[i]); };
+        img.onerror = function(){ tryNext(i+1); };
+        img.src = candidates[i];
+      })(0);
     });
   }
 

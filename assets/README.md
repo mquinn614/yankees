@@ -14,12 +14,15 @@ with the matching name, it swaps in automatically (handled by `loadPhotos()`).
 | File              | Where it appears        | Treatment        | Suggested shot |
 |-------------------|-------------------------|------------------|----------------|
 | `yanks.webp`    | Full-screen hero        | navy duotone     | Wide Yankee Stadium / crowd / championship celebration. Landscape, ≥2000px wide. |
-| `2009.jpg`        | "The 2009 Cliff"        | navy→gold duotone| 2009 World Series celebration / trophy. Portrait (4:5) works best. |
-| `judge.jpg`       | "Why Now" anchor card   | navy→gold duotone| Aaron Judge batting / portrait. Landscape (5:4). |
-| `closer.jpg`      | Closing section         | navy duotone (darkened) | Stadium at night / empty diamond / iconic façade. Landscape. |
+| `2009.*`          | "The 2009 Cliff"        | navy→gold duotone| 2009 World Series celebration / trophy. Portrait (4:5) works best. |
+| `judge.*`         | "Why Now" anchor card   | navy→gold duotone| Aaron Judge batting / portrait. Landscape (5:4). |
+| `closer.*`        | Closing section         | navy duotone (darkened) | Stadium at night / empty diamond / iconic façade. Landscape. |
 
-JPGs or PNGs both fine; keep them reasonably optimized. The duotone is applied
-in-browser, so commit normal full-color photos — do **not** pre-filter them.
+Each slot accepts `.webp`, `.jpg`, or `.png` — drop in whichever you have under
+the slot's base name (e.g. `judge.webp` **or** `judge.jpg`) and it's picked up
+automatically (the loader tries each in turn). WebP is preferred for size.
+The duotone is applied in-browser, so commit normal full-color photos —
+do **not** pre-filter them.
 
 ## Changing the treatment
 
