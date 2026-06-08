@@ -195,7 +195,7 @@
       "exit": "Lost ALCS",
       "opponent": "Houston Astros",
       "series": "3–4",
-      "note": "Up 3–2, one win from the pennant — then shut out twice in Houston. The Astros were later found to have stolen signs."
+      "note": "Up 3–2, one win from the pennant, then shut out twice in Houston. The Astros were later found to have stolen signs."
     },
     {
       "year": 2018,
@@ -217,7 +217,7 @@
       "exit": "Lost ALCS",
       "opponent": "Houston Astros",
       "series": "2–4",
-      "note": "103 wins. José Altuve's walk-off homer off Chapman ends Game 6 — and the season."
+      "note": "103 wins. José Altuve's walk-off homer off Chapman ends Game 6, and the season."
     },
     {
       "year": 2020,
@@ -261,7 +261,7 @@
       "exit": "Missed playoffs",
       "opponent": null,
       "series": null,
-      "note": "First losing-adjacent season since 1992 — 82–80, no October at all."
+      "note": "First losing-adjacent season since 1992: 82–80, no October at all."
     },
     {
       "year": 2024,
@@ -272,7 +272,7 @@
       "exit": "Lost World Series",
       "opponent": "Los Angeles Dodgers",
       "series": "1–4",
-      "note": "First pennant since 2009 — then a Game 5 unraveling hands the Dodgers the title."
+      "note": "First pennant since 2009, then a Game 5 unraveling hands the Dodgers the title."
     },
     {
       "year": 2025,
@@ -302,7 +302,7 @@
       "stage": "ALCS Game 7",
       "opponent": "Houston Astros",
       "how_close": "1 win from the pennant",
-      "detail": "Led the series 3–2, then was shut out in Games 6 and 7 in Houston — the Astros later admitted to an illegal sign-stealing scheme that season."
+      "detail": "Led the series 3–2, then was shut out in Games 6 and 7 in Houston. The Astros later admitted to an illegal sign-stealing scheme that season."
     },
     {
       "year": 2019,
@@ -316,7 +316,7 @@
       "stage": "World Series Game 5",
       "opponent": "Los Angeles Dodgers",
       "how_close": "1 inning from forcing Game 6",
-      "detail": "Led 5–0 in the clincher; a five-run fifth — fueled by defensive misplays — turned the title over to Los Angeles."
+      "detail": "Led 5–0 in the clincher; a five-run fifth, fueled by defensive misplays, turned the title over to Los Angeles."
     }
   ],
   "why_now": {
@@ -324,7 +324,7 @@
       "name": "Aaron Judge",
       "role": "Captain · CF/RF",
       "mvps": "2× AL MVP (2022, 2024)",
-      "calling_card": "62 HR in 2022 — the AL single-season record"
+      "calling_card": "62 HR in 2022, the AL single-season record"
     },
     "payroll": {
       "approx_usd_millions": 300,
@@ -333,7 +333,7 @@
     "window": [
       "A generational hitter in his prime anchoring the lineup as captain.",
       "A top-of-market payroll and a front office that spends to win now.",
-      "Twelve playoff trips in sixteen years — the door has never really closed.",
+      "Twelve playoff trips in sixteen years, and the door has never really closed.",
       "A 2024 pennant proved the roster can reach the final stage; the last step is all that's left."
     ]
   },

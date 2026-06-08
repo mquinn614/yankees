@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-update_data.py — regenerate data/yankees.json
+update_data.py - regenerate data/yankees.json
 
 Single source of truth for the "They're Due" scrollytelling page.
 
@@ -41,7 +41,7 @@ TITLES = [
     1977, 1978, 1996, 1998, 1999, 2000, 2009,
 ]
 
-# Titles grouped by decade — for the "dynasty pedigree" bar chart.
+# Titles grouped by decade - for the "dynasty pedigree" bar chart.
 TITLES_BY_DECADE = [
     {"decade": "1920s", "count": 3},
     {"decade": "1930s", "count": 5},
@@ -94,13 +94,13 @@ DROUGHT_YEARS = [
      "note": "Deadline sell-off. The Judge/Sánchez core debuts in the wreckage."},
     {"year": 2017, "wins": 91, "losses": 71, "playoffs": True,
      "round": "ALCS", "exit": "Lost ALCS", "opponent": "Houston Astros", "series": "3–4",
-     "note": "Up 3–2, one win from the pennant — then shut out twice in Houston. The Astros were later found to have stolen signs."},
+     "note": "Up 3–2, one win from the pennant, then shut out twice in Houston. The Astros were later found to have stolen signs."},
     {"year": 2018, "wins": 100, "losses": 62, "playoffs": True,
      "round": "ALDS", "exit": "Lost ALDS", "opponent": "Boston Red Sox", "series": "1–3",
      "note": "100 wins, but the 108-win Red Sox roll them and win it all."},
     {"year": 2019, "wins": 103, "losses": 59, "playoffs": True,
      "round": "ALCS", "exit": "Lost ALCS", "opponent": "Houston Astros", "series": "2–4",
-     "note": "103 wins. José Altuve's walk-off homer off Chapman ends Game 6 — and the season."},
+     "note": "103 wins. José Altuve's walk-off homer off Chapman ends Game 6, and the season."},
     {"year": 2020, "wins": 33, "losses": 27, "playoffs": True,
      "round": "ALDS", "exit": "Lost ALDS", "opponent": "Tampa Bay Rays", "series": "2–3",
      "note": "The 60-game year. Five-game ALDS lost in the bubble to the division-rival Rays."},
@@ -112,29 +112,29 @@ DROUGHT_YEARS = [
      "note": "Aaron Judge's 62-homer season ends in a four-game sweep by Houston."},
     {"year": 2023, "wins": 82, "losses": 80, "playoffs": False,
      "round": "DNQ", "exit": "Missed playoffs", "opponent": None, "series": None,
-     "note": "First losing-adjacent season since 1992 — 82–80, no October at all."},
+     "note": "First losing-adjacent season since 1992: 82–80, no October at all."},
     {"year": 2024, "wins": 94, "losses": 68, "playoffs": True,
      "round": "WS", "exit": "Lost World Series", "opponent": "Los Angeles Dodgers", "series": "1–4",
-     "note": "First pennant since 2009 — then a Game 5 unraveling hands the Dodgers the title."},
+     "note": "First pennant since 2009, then a Game 5 unraveling hands the Dodgers the title."},
     {"year": 2025, "wins": 94, "losses": 68, "playoffs": True,
      "round": "ALDS", "exit": "Lost ALDS", "opponent": "Toronto Blue Jays", "series": "1–3",
      "note": "Back to October, past Boston in the Wild Card round, then out in the division series."},
 ]
 
 # ---------------------------------------------------------------------------
-# Near-misses — the deepest, most painful runs that ended short.
+# Near-misses - the deepest, most painful runs that ended short.
 # ---------------------------------------------------------------------------
 
 NEAR_MISSES = [
     {"year": 2017, "stage": "ALCS Game 7", "opponent": "Houston Astros",
      "how_close": "1 win from the pennant",
-     "detail": "Led the series 3–2, then was shut out in Games 6 and 7 in Houston — the Astros later admitted to an illegal sign-stealing scheme that season."},
+     "detail": "Led the series 3–2, then was shut out in Games 6 and 7 in Houston. The Astros later admitted to an illegal sign-stealing scheme that season."},
     {"year": 2019, "stage": "ALCS Game 6", "opponent": "Houston Astros",
      "how_close": "1 swing from Game 7",
      "detail": "José Altuve's two-run walk-off homer off Aroldis Chapman ended the pennant on the spot."},
     {"year": 2024, "stage": "World Series Game 5", "opponent": "Los Angeles Dodgers",
      "how_close": "1 inning from forcing Game 6",
-     "detail": "Led 5–0 in the clincher; a five-run fifth — fueled by defensive misplays — turned the title over to Los Angeles."},
+     "detail": "Led 5–0 in the clincher; a five-run fifth, fueled by defensive misplays, turned the title over to Los Angeles."},
 ]
 
 # Summary counts across the drought (2010–2025), derived from DROUGHT_YEARS.
@@ -156,7 +156,7 @@ def _summary(years):
     }
 
 # ---------------------------------------------------------------------------
-# Why now — the contention case (current-era context).
+# Why now - the contention case (current-era context).
 # Keep payroll qualitative + approximate; exact figures shift each winter.
 # ---------------------------------------------------------------------------
 
@@ -165,7 +165,7 @@ WHY_NOW = {
         "name": "Aaron Judge",
         "role": "Captain · CF/RF",
         "mvps": "2× AL MVP (2022, 2024)",
-        "calling_card": "62 HR in 2022 — the AL single-season record",
+        "calling_card": "62 HR in 2022, the AL single-season record",
     },
     "payroll": {
         "approx_usd_millions": 300,
@@ -174,12 +174,12 @@ WHY_NOW = {
     "window": [
         "A generational hitter in his prime anchoring the lineup as captain.",
         "A top-of-market payroll and a front office that spends to win now.",
-        "Twelve playoff trips in sixteen years — the door has never really closed.",
+        "Twelve playoff trips in sixteen years, and the door has never really closed.",
         "A 2024 pennant proved the roster can reach the final stage; the last step is all that's left.",
     ],
 }
 
-# "Due" case — the statistical argument.
+# "Due" case - the statistical argument.
 DUE_CASE = {
     "avg_years_between_titles_1923_2009": 3.3,   # 27 titles across the 1923–2009 span
     "playoff_rate_drought": None,                # filled below from summary
