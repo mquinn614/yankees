@@ -168,10 +168,14 @@
   .cliff-grid > *{min-width:0;}
   .cliff-photo{aspect-ratio:4/5; border-radius:3px;}
   .timeline-titles{margin-top:1.5rem;}
-  .tl-track{display:flex; align-items:flex-end; gap:3px; height:120px; margin-top:1rem; width:100%; overflow:hidden;}
+  .tl-track{position:relative; display:flex; align-items:flex-end; gap:3px; height:120px; margin-top:1rem; width:100%; overflow:hidden;}
   .tl-tick{flex:1 1 0; min-width:0; background:var(--gold); opacity:.92; border-radius:1px 1px 0 0;}
   .tl-tick.gap{background:rgba(255,255,255,.14);}
-  .tl-cap{display:flex; justify-content:space-between; font-family:var(--mono); font-size:12px; color:rgba(255,255,255,.6); margin-top:.7rem;}
+  /* shaded region after the last title (2009 → present) = the drought */
+  .tl-drought{position:absolute; top:0; bottom:0; right:0; border-left:1px dashed rgba(216,169,98,.7); background:linear-gradient(90deg, rgba(216,169,98,.14), rgba(216,169,98,.03)); pointer-events:none;}
+  .tl-cap{position:relative; height:1.1em; font-family:var(--mono); font-size:12px; color:rgba(255,255,255,.55); margin-top:.7rem;}
+  .tl-cap span{position:absolute; white-space:nowrap;}
+  .tl-cap .mid{color:var(--gold-bright);}
   .pullquote{font-family:var(--serif-display); font-weight:700; font-style:italic; font-size:clamp(24px,3.4vw,38px); line-height:1.22; color:var(--white);}
   .pullquote .gold{color:var(--gold-bright);}
 
@@ -392,7 +396,7 @@
         <div class="timeline-titles">
           <div class="kicker">Championships, 1923 → 2009, then the drought</div>
           <div class="tl-track" id="titleTimeline" aria-hidden="true"></div>
-          <div class="tl-cap"><span>1923</span><span>2009</span><span data-bind="through_season">2025</span></div>
+          <div class="tl-cap" id="titleAxis"></div>
         </div>
       </div>
     </div>
@@ -962,6 +966,10 @@
     if(!host) return;
     var start = 1923;
     var end = (data.meta && data.meta.through_season) || 2025;
+    var lastTitle = (data.meta && data.meta.last_title_year) || 2009;
+    var span = (end - start) || 1;
+    var pctOf = function(year){ return (year - start) / span * 100; };
+
     var titles = {};
     (data.titles||[]).forEach(function(y){ titles[y]=true; });
     for(var y=start; y<=end; y++){
@@ -972,6 +980,33 @@
       t.style.height = won ? '100%' : '14%';
       t.title = y + (won ? ', World Series' : '');
       host.appendChild(t);
+    }
+
+    // shade everything after the last title — that stretch is the drought,
+    // and its dashed left edge sits exactly under the final gold tick.
+    var band = document.createElement('div');
+    band.className = 'tl-drought';
+    band.style.left = pctOf(lastTitle) + '%';
+    host.appendChild(band);
+
+    // axis labels positioned at their TRUE year-locations (not evenly spaced),
+    // so the last title reads at its real spot (~84%), not the center.
+    var axis = document.getElementById('titleAxis');
+    if(axis){
+      axis.innerHTML = '';
+      var place = function(text, year, cls){
+        var s = document.createElement('span');
+        s.textContent = text;
+        if(cls) s.className = cls;
+        var p = pctOf(year);
+        if(year === start){ s.style.left = '0'; }
+        else if(year === end){ s.style.right = '0'; }
+        else { s.style.left = p + '%'; s.style.transform = 'translateX(-50%)'; }
+        axis.appendChild(s);
+      };
+      place(start, start);
+      place(lastTitle, lastTitle, 'mid');   // 2009, at its real position
+      place(end, end);
     }
   }
 
